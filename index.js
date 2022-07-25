@@ -16,7 +16,7 @@ async function connect() {
 }
 
 async function fund() {
-  const ethAmount = "1";
+  const ethAmount = document.getElementById("ethAmount").value;
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -35,9 +35,12 @@ async function fund() {
 
 function listenForTransaction(transactionResponse, provider) {
   console.log(`Mining ${transactionResponse.hash}...`);
-  provider.once(transactionResponse.hash, (transactionReceipt) => {
-    console.log(
-      `completed with ${transactionReceipt.confirmations} confirmations`
-    );
+  return new Promise((resolve, reject) => {
+    provider.once(transactionResponse.hash, (transactionReceipt) => {
+      console.log(
+        `completed with ${transactionReceipt.confirmations} confirmations`
+      );
+      resolve();
+    });
   });
 }
