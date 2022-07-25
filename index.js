@@ -16,13 +16,28 @@ async function connect() {
 }
 
 async function fund() {
-  const ethAmount = "15";
+  const ethAmount = "1";
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(contractAddress, abi, signer);
-    const transactionResponse = await contract.fund({
-      value: ethers.utils.parseEther(ethAmount),
-    });
+
+    try {
+      const transactionResponse = await contract.fund({
+        value: ethers.utils.parseEther(ethAmount),
+      });
+      await listenForTransaction(transactionResponse, provider);
+    } catch (err) {
+      console.log(err);
+    }
   }
+}
+
+function listenForTransaction(transactionResponse, provider) {
+  console.log(`Mining ${transactionResponse.hash}...`);
+  provider.once(transactionResponse.hash, (transactionReceipt) => {
+    console.log(
+      `completed with ${transactionReceipt.confirmations} confirmations`
+    );
+  });
 }
