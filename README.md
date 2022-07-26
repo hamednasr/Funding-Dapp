@@ -1,5 +1,6 @@
 # MetaMask-Dapp
-This Dapp is a donation fund raising website!
+## This Repo is the Front End of a donation fund raising Dapp on the Blockchain!
+![blockchain-ethereum-1](https://user-images.githubusercontent.com/76178686/180966424-6f53f68f-0ba0-455b-abd6-cc219aa581c8.jpg)
 
 Welcome to the donation website!
 
