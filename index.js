@@ -32,6 +32,7 @@ async function fund() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(contractAddress, abi, signer);
+    document.getElementById("loading1").style.display = "block";
 
     try {
       const transactionResponse = await contract.fund({
@@ -41,6 +42,7 @@ async function fund() {
     } catch (err) {
       console.log(err);
     }
+    document.getElementById("loading1").style.display = "none";
   }
 }
 
@@ -60,6 +62,7 @@ async function withdraw() {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(contractAddress, abi, signer);
+  document.getElementById("loading2").style.display = "block";
 
   try {
     const transactionResponse = await contract.withdraw();
@@ -67,4 +70,5 @@ async function withdraw() {
   } catch (err) {
     console.log(err);
   }
+  document.getElementById("loading2").style.display = "none";
 }
