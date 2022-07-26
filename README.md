@@ -1,5 +1,7 @@
-# MetaMask-Dapp
-## This Repo is the Front End of a donation fund raising Dapp on the Blockchain!
+# Fundraising Dapp
+## This Repo is the Frontend of a donation fundraising Dapp on the Blockchain!
+## For Backend codes check this repo: [Dapp Backend](https://github.com/hamednasr/ethers.js/tree/main/hardhat_fund_me) 
+
 ![blockchain-ethereum-1](https://user-images.githubusercontent.com/76178686/180966424-6f53f68f-0ba0-455b-abd6-cc219aa581c8.jpg)
 
 Welcome to the donation website!
