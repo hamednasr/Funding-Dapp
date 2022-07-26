@@ -1,11 +1,14 @@
 import { ethers } from "./ethers-5.6.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
+
 const connectButton = document.getElementById("connectButton");
 const fundButton = document.getElementById("fundButton");
 const balanceButton = document.getElementById("balanceButton");
+const withdrawButton = document.getElementById("withdrawButton");
 connectButton.onclick = connect;
 fundButton.onclick = fund;
 balanceButton.onclick = balance;
+withdrawButton.onclick = withdraw;
 
 async function connect() {
   if (typeof window.ethereum !== "undefined") {
@@ -51,4 +54,17 @@ function listenForTransaction(transactionResponse, provider) {
       resolve();
     });
   });
+}
+
+async function withdraw() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(contractAddress, abi, signer);
+
+  try {
+    const transactionResponse = await contract.withdraw();
+    await listenForTransaction(transactionResponse, provider);
+  } catch (err) {
+    console.log(err);
+  }
 }
