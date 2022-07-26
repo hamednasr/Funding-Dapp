@@ -2,8 +2,10 @@ import { ethers } from "./ethers-5.6.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
 const connectButton = document.getElementById("connectButton");
 const fundButton = document.getElementById("fundButton");
+const balanceButton = document.getElementById("balanceButton");
 connectButton.onclick = connect;
 fundButton.onclick = fund;
+balanceButton.onclick = balance;
 
 async function connect() {
   if (typeof window.ethereum !== "undefined") {
@@ -13,6 +15,12 @@ async function connect() {
     document.getElementById("connectButton").innerHTML =
       "MetaMask is not installed!";
   }
+}
+
+async function balance() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const balance = await provider.getBalance(contractAddress);
+  console.log(balance.toString());
 }
 
 async function fund() {
